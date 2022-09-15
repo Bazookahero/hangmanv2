@@ -29,7 +29,10 @@ namespace hangman
                 Console.WriteLine("1. Play the game");
                 Console.WriteLine("2. Quit");
                 menuNumber = int.Parse(Console.ReadLine());
-                
+                if (menuNumber == 2)
+                {
+                    Environment.Exit(1);
+                }
                 string answer;
                 int z = 0;
                
