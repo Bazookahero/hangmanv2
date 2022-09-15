@@ -113,6 +113,8 @@ namespace hangman
                         
                         if (z == 5)
                         {
+                            Console.Clear();
+                            hangManVisual(z);
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("better luck next time!");
                             reset = false;
