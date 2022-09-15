@@ -50,7 +50,7 @@ namespace hangman
                             Console.Clear();
                             Console.ResetColor();
                             hangManVisual(z);
-                            Console.WriteLine("here's a random word: {0}, guess a letter. The word is {1} characters long", newWord, newWord.Length);
+                            Console.WriteLine("here's a random word: {0}, guess a letter or a word. The word is {1} characters long", newWord, newWord.Length);
                             Console.Write("incorrect guesses: ");
                             Console.WriteLine(string.Join(" ", answersArray));
 
