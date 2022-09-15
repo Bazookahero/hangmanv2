@@ -6,27 +6,7 @@ namespace hangman
     {
         static void Main(string[] args)
         {
-            //char[] secretWord = new char[20];
-            //char[] playerGuess = new char[20];
-            /* string[] word = { "apple", "school", "garage", "through", "storage", "github", "hungry", "watermelon" };
-            Random random = new Random();
-            int randomWord = random.Next(0, 8);
-            string chosenWord = word[randomWord];
-            string newWord = "";
-            int x = 0;
-            int? menuNumber;
-            char[] chosenWordArray = chosenWord.ToCharArray(0, chosenWord.Length);
-            for (x = 0; x < chosenWordArray.Length; x++)
-            {
-                newWord += "*";
-            }
-*/
 
-            /*for (int u = 0; u < chosenWord.Length; u++)
-            {
-                secretWord[u] = chosenWord[u];
-                
-            }*/
             bool reset = true;
             int? menuNumber;
             do
@@ -50,12 +30,6 @@ namespace hangman
                 Console.WriteLine("2. Quit");
                 menuNumber = int.Parse(Console.ReadLine());
                 
-
-
-
-
-
-                // char[] answerArr = new char[20];
                 string answer;
                 int z = 0;
                
@@ -65,7 +39,7 @@ namespace hangman
                     {
 
 
-                        while (newWord.Contains('*') && z < 5 && menuNumber != 2)
+                        while (newWord.Contains('*') && z < 5)
                         {
 
                             Console.WriteLine("press any key to continue");
@@ -82,49 +56,9 @@ namespace hangman
                             string[] storedAnswer = new string[5];
 
                             
-
-
-
-
-
-
-
-
-
-
-                            //char[] answerArray = answer.ToCharArray(0, answer.Length);
-                            /*for (int k = 0; k < answer.Length; k++)
-                            {
-                            answerArr = answer.ToCharArray(k, 1);
-
-                            } */
-                            /*  string[] answerLetters = answer.Split(",");
-                          List<char> chars = new List<char>();
-                          char oneChar;
-
-
-                          foreach(string s in answerLetters)
-                          {
-                              if (char.TryParse(s, out oneChar))
-                                  chars.Add(oneChar);
-                          }
-                          chars.ToArray(); */
-                            // string to char test
-
-                            /* for(int u = 0; u<answer?.Length;u++)
-                             {
-                                 userInput[u] = answer.Substring(u, 1);
-                             }*/
-
-
                             bool containsLetter = false;
 
-                            if (answer == chosenWord || !newWord.Contains('*'))
-                            {
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine("congratulations! you won! the word was: {0}", chosenWord);
-                                reset = false;
-                            }
+                            
                             if (answer.Length == 1 && chosenWord.Contains(answer[0]))
                             {
                                 char answerChar = char.Parse(answer);
@@ -141,12 +75,26 @@ namespace hangman
                                 }
 
                             }
+                            if (answer == chosenWord || !newWord.Contains('*'))
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                newWord = newWord.Remove(0, newWord.Length);
+                                newWord = newWord.Insert(0, "" + answer);
+                                Console.WriteLine("congratulations! you won! the word was: {0}", chosenWord);
+                                reset = false;
+                            }
+                            if (answer.Length > 1 && answer != chosenWord)
+                            {
+                                answersArray[z] = answer;
 
+                                storedAnswer[z] = answersArray[z];
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("incorrect! You have {0} guess(es) left!", (4 - z));
 
+                                z++;
+                            }
 
-
-
-                            if (!chosenWord.Contains(answer[0]))
+                                if (answer.Length == 1 && !chosenWord.Contains(answer[0]))
                             {
                                 answersArray[z] = answer;
 
@@ -159,11 +107,7 @@ namespace hangman
 
                         }
 
-                        /*if (!newWord.Contains('*'))
-                        {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("congratulations! you won! the word was: {0}", newWord);
-                        }*/
+                        
                         if (z == 5)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
@@ -180,10 +124,8 @@ namespace hangman
                     }
                     Console.ReadKey();
                 } while (reset == true);
-            } while (reset == false);
-            
-            
-            
+            } while (menuNumber == 1);
+                 
             static void hangManVisual(int extraLives)
             {
                 switch (extraLives)
